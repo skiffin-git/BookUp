@@ -3,7 +3,7 @@ BookUp is a reservation platform for people who want go on vacations and can't f
 A perfectly reusable MVC software architecture allows to easily modify and change listings models.
 
 * Ability for client/customer to register and login/logout.
-* Be able to delete account/listings.
+* Be able to create and delete account/listings.
 * Ability to search for listings by location/available dates/number of guests.
 * Ability to book the listing.
   
