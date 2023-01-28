@@ -13,4 +13,4 @@ A perfectly reusable MVC software architecture allows to easily modify and chang
 
 ![BookUp](bookUp.png)
 
-## [Documentation](https://artak10t.github.io/BookUp/)
+## [Documentation](https://skiffin-git.github.io/BookUp/)
