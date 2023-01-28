@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="eng">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/795e3cb908.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/favicon.ico?v2" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Listing</title>
+</head>
+<body>
+<div th:include="fragments/navbar"/>
+<div class="container shadow p-3 mb-5 bg-white rounded" >
+    <!-- Images -->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div th:remove="tag" th:if="${images != null}" th:each="image, iter: ${images}">
+                <div class="carousel-item active" th:if="${iter.first}">
+                    <img class="d-block w-100 border rounded" th:src="@{/images/} + ${image} + @{.jpg}">
+                </div>
+                <div class="carousel-item" th:if="${!iter.first}">
+                    <img class="d-block w-100 border rounded" th:src="@{/images/} + ${image} + @{.jpg}">
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <hr/>
+    <td><a th:href="${id} + @{/edit}" type="button" class="btn btn-primary float-right">Edit</a></td>
+    <!-- Info -->
+    <h2>Info</h2>
+    <hr/>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                        </div>
+                        <p class="form-control" id="location" th:text="${location}" aria-describedby="locationHelp"/>
+                    </div>
+                    <small id="locationHelp" class="form-text text-muted">Location of the site.</small>
+                </div>
+                <div class="form-group">
+                    <label for="contactInformation">Contact Information</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                        </div>
+                        <p class="form-control" id="contactInformation" th:text="${contactInformation}" aria-describedby="contactInformationHelp">
+                    </div>
+                    <small id="contactInformationHelp" class="form-text text-muted">Number of phone, email, or any other contact information.</small>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-dollar-sign"></i></span>
+                        </div>
+                        <p class="form-control" id="price" th:text="${price}" aria-describedby="priceHelp"><br/>
+                    </div>
+                    <small id="priceHelp" class="form-text text-muted">Price per day.</small>
+                </div>
+                <div class="form-group">
+                    <label for="maxGuests">Maximum Guests</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-bed"></i></span>
+                        </div>
+                        <p class="form-control" id="maxGuests" th:text="${maxGuests}" aria-describedby="maxGuestsHelp">
+                    </div>
+                    <small id="maxGuestsHelp" class="form-text text-muted">Maximum number of guests allowed.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description -->
+    <h2>Description</h2>
+    <hr/>
+    <div class="form-group">
+        <p id="description" th:text="${description}" aria-describedby="descriptionHelp"></p>
+        <small id="descriptionHelp" class="form-text text-muted">Description of the site, such as count of rooms, amenities, features, dogs allowed or not.</small>
+    </div>
+
+    <!-- Available Days -->
+    <h2>Available Days</h2>
+    <hr/>
+    <p>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDays" aria-expanded="false" aria-controls="collapseExample">
+            Show
+        </button>
+    </p>
+    <div class="collapse" id="collapseDays">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${availableDays != null}" th:each="day: ${availableDays}">
+                <td th:text="${#calendars.format(day, 'MM/dd/yyyy').toString()}"/>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

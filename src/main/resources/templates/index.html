@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <script src="https://kit.fontawesome.com/795e3cb908.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="icon" href="/favicon.ico?v2" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+</head>
+<body>
+<div th:include="fragments/navbar"/>
+
+<!-- List Listings -->
+<i class="bi bi-people"></i>
+<div class="container p-3 row  mx-auto">
+<ul class="list-group m-3" th:if="${listings != null}" th:each="listing: ${listings}">
+    <div class="card m-3 " style="width: 19rem;">
+        <img th:src="@{/images/} + ${listing.getImage(0)} + @{.jpg}" class="card-img-top" style="height: 100%">
+        <div class="card-body">
+            <div class="card-block">
+                <h5 class="card-title" text="Title"><div th:utext="${listing.getLocation()}"/></h5>
+                    <div th:utext="${#strings.abbreviate(listing.getDescription(), 150)}"/>
+                <div class="row p-3">
+                    <div><i class="fa fa-bed" aria-hidden="true"></i><span class="txt" th:utext="' ' + ${listing.getMaxGuests()} + ' ' + @{people}"></span></div>
+                    <div class="pl-3"><i class="fas fa-dollar-sign"></i><span class="number" th:utext="' ' + ${listing.getPrice()} + ' ' + @{per day}"/></span></div>
+                </div>
+                <a th:href="@{/listing/} + ${listing.getId()}" class="btn btn-primary btn-lg btn-block ">View</a>
+            </div>
+        </div>
+    </div>
+</ul>
+</div>
+</body>
+</html>

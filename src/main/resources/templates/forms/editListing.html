@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/795e3cb908.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="/favicon.ico?v2" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit</title>
+</head>
+<body>
+<div th:include="fragments/navbar"/>
+
+<div class="container shadow p-3 mb-5 bg-white rounded" >
+
+    <!-- Upload Image -->
+    <h2>Images</h2>
+    <form th:action="@{/listing/} + ${id} + @{/edit/uploadImage}" method="post" enctype="multipart/form-data">
+        <div class="custom-file">
+            <input type="file" name="img" accept="image/png, image/jpeg" required>
+            <button class="btn btn-outline-success float-right" type="submit">Upload</button>
+            <small class="form-text text-muted">Maximum allowed size is 5mb.</small>
+        </div>
+    </form>
+
+    <!-- Images -->
+    <p>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseImages" aria-expanded="false" aria-controls="collapseExample">
+            Show
+        </button>
+    </p>
+    <div class="collapse" id="collapseImages">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${images != null}" th:each="img: ${images}">
+                <td class="w-25"><img class="img-fluid img-thumbnail" th:src="@{/images/} + ${img} + @{.jpg}"/></td>
+                <td class="align-middle"><a th:href="@{edit/removeImage/} + ${img}" type="button" class="btn btn-outline-danger float-right">Remove</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr/>
+    <!-- Edit Form, submit button is outside form -->
+    <form id="saveForm" action="#" th:action="@{/listing/save}" th:object="${listing}" method="post">
+        <h2>Properties</h2>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                </div>
+                <input type="text" class="form-control" id="location" th:field="*{location}" aria-describedby="locationHelp" placeholder="Enter location" required>
+            </div>
+            <small id="locationHelp" class="form-text text-muted">Location of the site.</small>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-file-alt"></i></span>
+                </div>
+                <textarea class="form-control" rows="5" id="description" th:field="*{description}" aria-describedby="descriptionHelp" placeholder="Enter description" required></textarea>
+            </div>
+            <small id="descriptionHelp" class="form-text text-muted">Description of the site, such as count of rooms, amenities, features, dogs allowed or not.</small>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-dollar-sign"></i></span>
+                </div>
+                <input type="number" class="form-control" min="1" id="price" th:field="*{price}" aria-describedby="priceHelp" placeholder="Enter price" required><br/>
+            </div>
+            <small id="priceHelp" class="form-text text-muted">Price per day.</small>
+        </div>
+        <div class="form-group">
+            <label for="maxGuests">Maximum Guests</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-bed"></i></span>
+                </div>
+                <input type="number" class="form-control" min="1" id="maxGuests" th:field="*{maxGuests}" aria-describedby="maxGuestsHelp" placeholder="Enter Maximum Guests" required>
+            </div>
+            <small id="maxGuestsHelp" class="form-text text-muted">Maximum number of guests allowed.</small>
+        </div>
+        <div class="form-group">
+            <label for="contactInformation">Contact Information</label>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                </div>
+                <input type="text" class="form-control" id="contactInformation" th:field="*{contactInformation}" aria-describedby="contactInformationHelp" placeholder="Enter Contact Information" required>
+            </div>
+            <small id="contactInformationHelp" class="form-text text-muted">Number of phone, email, or any other contact information.</small>
+        </div>
+        <input type="hidden" th:field="*{id}"/>
+    </form>
+    <hr/>
+    <!-- Add Available Day Form -->
+    <h2>Available Days</h2>
+    <form th:action="@{/listing/} + ${id} + @{/edit/newDay}">
+        <div class="input-group">
+            <input type="date" class="form-control" name="date" placeholder="New available day" required>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add</button>
+        </div>
+    </form>
+
+    <!-- Available Days -->
+    <p>
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDays" aria-expanded="false" aria-controls="collapseExample">
+            Show
+        </button>
+    </p>
+    <div class="collapse" id="collapseDays">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${availableDays != null}" th:each="day: ${availableDays}">
+                <td th:text="${#calendars.format(day, 'MM/dd/yyyy').toString()}"/>
+                <td><a th:href="@{edit/removeDay/} + ${day.toString()}" type="button" class="btn btn-outline-danger float-right">Remove</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button form="saveForm" type="submit" class="btn btn-primary">Save</button>
+    <td><a th:href="@{edit/delete}" type="button" class="btn btn-danger float-right">Delete</a></td>
+</div>
+</body>
+</html>

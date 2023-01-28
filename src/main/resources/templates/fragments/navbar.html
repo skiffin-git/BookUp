@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow p-3 mb-5 bg-white rounded">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            BookUp
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Search bar form -->
+        <form th:action="@{/search/}" class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+                <input type="text" th:value="${location}" minlength="3" name="location" class="form-control" placeholder="Location" required>
+                <input type="date" th:value="${checkIn}" name="check-in" class="form-control" placeholder="Check-in" required>
+                <input type="date" th:value="${checkOut}" name="check-out" class="form-control" placeholder="Check-out" required>
+                <input type="number" th:value="${guests}" name="guests" class="form-control" min="1" placeholder="Guests" required>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+
+        <!-- Account dropdown -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <ul class="navbar-nav mr-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/login">Login</a>
+                        <a class="dropdown-item" href="/register">Register</a>
+                        <a class="dropdown-item" href="#">My Listings</a>
+                        <a class="dropdown-item" href="/listing">New Listing</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
