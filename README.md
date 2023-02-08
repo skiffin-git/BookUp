@@ -1,16 +1,35 @@
 # BookUp
-BookUp is a reservation platform for people who want go on vacations and can't find places to stay. Allows to rent and list houses. 
-A perfectly reusable MVC software architecture allows to easily modify and change listings models.
 
-* Ability for client/customer to register and login/logout.
-* Be able to create and delete account/listings.
-* Ability to search for listings by location/available dates/number of guests.
-* Ability to book the listing.
-  
-## Getting Started
-* Required dependencies include: Spring Boot, SQLite, Thymeleaf.
-* Compile application using JDK 11+ and run.
+BookUp is a platform for people who want to go on vacations and find it difficult to secure a place to stay. 
+It allows users to rent and list houses for their vacations. 
+With a reusable MVC software architecture, it is easy to modify and change the listings models.
 
-![BookUp](bookUp.png)
+![Main Page](main-page.jpg)
 
-## [Documentation](https://skiffin-git.github.io/BookUp/)
+## Features
+
+### User Registration and Login
+
+![Log-in and Register](log-in-and-register.jpg)
+
+### Ability to create and delete account/listings
+
+![New Listing](new-listing.jpg)
+
+### Search for listings by location, available dates, and number of guests
+
+![Look Listing](look-listing.jpg)
+
+### Book a listing
+
+![Single Listing](single-listing.jpg)
+
+## Running the Project
+
+The following dependencies are required to run the project:
+* Spring Boot
+* SQLite
+* Thymeleaf
+
+Compile the application using JDK 11+ and run.
+
